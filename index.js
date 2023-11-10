@@ -4,10 +4,10 @@ import { availableParallelism } from "node:os";
 import { fileURLToPath } from "node:url";
 import * as os from "node:os";
 
-function Threaded(num, host, port, listener) {
+export function Threaded(num, host, port, listener, framework = "http") {
     host = host || "locahost";
     port = port || 9000;
-    
+
     /** @type {http.RequestListener} */
     listener = listener || function (req, res) {
         res.writeHead(200);
@@ -15,7 +15,7 @@ function Threaded(num, host, port, listener) {
     };
 
     if (isMainThread) {
-        const server = http.createServer(listener);
+        const server = framework !== "koa" ? http.createServer(listener) : http.createServer(listener.callback());
         server.listen(port, () => {
             console.log(`Listening on http://${host}:${port}/ (threadId: ${threadId})`);
             const maxWorkers = num || (availableParallelism() - 1);
@@ -31,11 +31,13 @@ function Threaded(num, host, port, listener) {
             }
         });
     } else {
-        http.createServer(listener).listen(workerData.handle, () => {
+
+        http.createServer(framework !== "koa" ? listener : listener.callback()).listen(workerData.handle, () => {
             console.log(`Listening on http://${host}:${port}/ (threadId: ${threadId})`);
         });
     }
 }
 
-module.exports = Threaded;
+export default Threaded;
+// module.exports = Threaded;
 
