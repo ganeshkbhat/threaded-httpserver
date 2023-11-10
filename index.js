@@ -5,7 +5,9 @@ import { fileURLToPath } from "node:url";
 import * as os from "node:os";
 
 function Threaded(num, host, port, listener) {
-
+    host = host || "locahost";
+    port = port || 9000;
+    
     /** @type {http.RequestListener} */
     listener = listener || function (req, res) {
         res.writeHead(200);
