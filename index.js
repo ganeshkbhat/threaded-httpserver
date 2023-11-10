@@ -31,7 +31,6 @@ export function Threaded(num, host, port, listener, framework = "http") {
             }
         });
     } else {
-
         http.createServer(framework !== "koa" ? listener : listener.callback()).listen(workerData.handle, () => {
             console.log(`Listening on http://${host}:${port}/ (threadId: ${threadId})`);
         });
