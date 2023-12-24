@@ -4,18 +4,18 @@ import { availableParallelism } from "node:os";
 import { fileURLToPath } from "node:url";
 import * as os from "node:os";
 
-export function Threaded(num, host, port, listener, framework = "http") {
+export function Threaded(filepath, num, host, port, listener, framework = "http") {
     host = host || "locahost";
     port = port || 9000;
 
     /** @type {http.RequestListener} */
-    listener = listener || function (req, res) {
+    listener = !!listener ? listener : function (req, res) {
         res.writeHead(200);
-        res.end(`Hello World! (threadId: ${threadId})\n`);
+        res.end(`Default: Hello World! (threadId: ${threadId})\n`);
     };
 
     if (isMainThread) {
-        const server = framework !== "koa" ? http.createServer(listener) : http.createServer(listener.callback());
+        const server = framework !== "koa" ? http.createServer(listener) : http.createServer(listener);
         server.listen(port, () => {
             console.log(`Listening on http://${host}:${port}/ (threadId: ${threadId})`);
             const maxWorkers = num || (availableParallelism() - 1);
@@ -23,16 +23,13 @@ export function Threaded(num, host, port, listener, framework = "http") {
             for (let i = 0; i < maxWorkers; i++) {
                 let data;
                 if (os.type() === "Windows_NT") {
-                    data = { workerData: { handle: { port: server._handle.port } } }
+                    data = { workerData: { handle: { port: server._handle.port }, host: host, port: port, framework: framework } }
                 } else {
-                    data = { workerData: { handle: { fd: server._handle.fd } } }
+                    data = { workerData: { handle: { fd: server._handle.fd }, host: host, port: port, framework: framework } }
                 }
-                new Worker(fileURLToPath(import.meta.url), data);
+                // new Worker(fileURLToPath(import.meta.url), data);
+                new Worker(filepath, data);
             }
-        });
-    } else {
-        http.createServer(framework !== "koa" ? listener : listener.callback()).listen(workerData.handle, () => {
-            console.log(`Listening on http://${host}:${port}/ (threadId: ${threadId})`);
         });
     }
 }

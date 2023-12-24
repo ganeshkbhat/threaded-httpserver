@@ -1,4 +1,4 @@
-import { default as MultiThread } from './tds.js';
+import { default as MultiThread } from './extras.tds.js';
 
 // Your thread function
 const threadFunction = (data) => {

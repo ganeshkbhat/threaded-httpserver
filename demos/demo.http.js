@@ -4,4 +4,3 @@ import Threaded from "../index.js";
 
 Threaded(10, "localhost", 3000);
 
-

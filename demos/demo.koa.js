@@ -1,12 +1,14 @@
-
 import * as http from "node:http";
 import * as https from "node:https";
-import Koa from "koa";
-import Threaded from "../index.js";
+import { isMainThread, Worker, workerData, threadId } from "node:worker_threads";
+import { availableParallelism } from "node:os";
+import { fileURLToPath } from "node:url";
+import * as os from "node:os";
 
-const app = new Koa();
+import { default as Threaded } from "../index.js";
+import * as path from "node:path";
 
-// http.createServer(app.callback()).listen(3000);
-// https.createServer(app.callback()).listen(3001);
+const listener = import("./koa.js").server;
 
-Threaded(10, "localhost", 3000, app, "koa")
+Threaded(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\serverfile.js"), 10, "localhost", 3000, listener, "koa");
+
