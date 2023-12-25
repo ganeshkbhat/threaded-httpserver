@@ -11,6 +11,7 @@
 // Threaded(10, "localhost", 3000, app, "express");
 
 import * as http from "node:http";
+import * as https from "node:https";
 import express from "express";
 import { isMainThread, Worker, workerData, threadId } from "node:worker_threads";
 import { availableParallelism } from "node:os";

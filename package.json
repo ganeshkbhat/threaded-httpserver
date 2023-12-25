@@ -1,16 +1,29 @@
 {
-  "name": "threaded-httpserver",
-  "version": "1.0.0",
-  "description": "threaded-httpserver provides support for threaded server",
+  "name": "concurrent-httpserver",
+  "version": "0.0.1",
+  "description": "multi-processing and multi-threaded http servers that provides support for express, fastify, koa, https, https servers",
   "main": "index.js",
   "type": "module",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
-  "keywords": [],
+  "keywords": [
+    "concurrent server",
+    "concurrent http server",
+    "concurrent https server",
+    "concurrent express server",
+    "express",
+    "server",
+    "multi-threaded",
+    "multi-processing",
+    "http",
+    "https",
+    "concurrent server stubs",
+    "concurrent server templates"
+  ],
   "author": "Ganesh Bhat",
   "license": "MIT",
   "devDependencies": {

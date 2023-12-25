@@ -1,6 +1,6 @@
 import * as http from "node:http";
 import * as https from "node:https";
-import Threaded from "../index.js";
+import { MultiThreaded, MultiThreadedAsync } from "../index.js";
 
-Threaded(10, "localhost", 3000);
+MultiThreaded(10, { host: "localhost", port: 3000, listener: listener });
 

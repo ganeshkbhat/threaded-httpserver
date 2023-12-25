@@ -6,17 +6,17 @@ import { fileURLToPath } from "node:url";
 import * as os from "node:os";
 import { default as server } from "./fastify.js";
 
-import { default as Threaded } from "../index.js";
+import { MultiThreaded, MultiThreadedAsync } from "../index.js";
 import * as path from "node:path";
 
 
 // var listener = server;
-// var srv = Threads.Threaded(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\template_server.js"), 10, "localhost", 3000, listener, "fastify");
+// var srv = MultiThreaded(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\template_server.js"), 10, { host: "localhost", port: 3000, listener: listener }, "fastify");
 // setInterval(() => console.log("Threaded function implemented: ", srv), 5000);
 
 function thread() {
     var listener = server;
-    Threaded(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\template_server.js"), 10, "localhost", 3000, listener, "fastify");    
+    let srv = MultiThreadedAsync(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\template_server.js"), 10, { host: "localhost", port: 3000, listener: listener }, "fastify");    
     srv.then(console.log);    
 }
 
