@@ -11,12 +11,12 @@ import * as path from "node:path";
 
 
 // var listener = server;
-// var srv = MultiThreaded(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\template_server.js"), 10, { host: "localhost", port: 3000, listener: listener }, "koa");
+// var srv = MultiThreaded(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\template_thread_server.js"), 10, { host: "localhost", port: 3000, listener: listener }, "koa");
 // setInterval(() => console.log("Threaded function implemented: ", srv), 5000);
 
 function thread() {
     var listener = server;
-    let srv = MultiThreadedAsync(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\template_server.js"), 10, { host: "localhost", port: 3000, listener: listener }, "koa");
+    let srv = MultiThreadedAsync(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\template_thread_server.js"), 10, { host: "localhost", port: 3000, listener: listener }, "koa");
     srv.then(console.log);
 }
 

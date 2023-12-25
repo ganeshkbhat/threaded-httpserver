@@ -18,7 +18,7 @@ describe("Performance Test", function () {
     var server;
 
     beforeAll(async (done) => {
-        let res = await MultiThreadedAsync(path.join("../demos/template_server.js"), 10, { host: "localhost", port: 3000, listener: server }, "express");
+        let res = await MultiThreadedAsync(path.join("../demos/template_thread_server.js"), 10, { host: "localhost", port: 3000, listener: server }, "express");
         server = res.server;
         // done();
     });
