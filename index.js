@@ -1,8 +1,10 @@
 import * as http from "node:http";
+import * as http from "node:https";
 import { isMainThread, Worker, workerData, threadId } from "node:worker_threads";
 import { availableParallelism } from "node:os";
 import { fileURLToPath } from "node:url";
 import * as os from "node:os";
+
 
 /**
  *
