@@ -8,29 +8,34 @@ export function Threaded(filepath, num, host, port, listener, framework = "http"
     host = host || "locahost";
     port = port || 9000;
 
-    /** @type {http.RequestListener} */
-    listener = !!listener ? listener : function (req, res) {
-        res.writeHead(200);
-        res.end(`Default: Hello World! (threadId: ${threadId})\n`);
-    };
+    // /** @type {http.RequestListener} */
+    // listener = !!listener ? listener : function (req, res) {
+    //     res.writeHead(200);
+    //     res.end(`Default: Hello World! (threadId: ${threadId})\n`);
+    // };
 
     if (isMainThread) {
-        const server = framework !== "koa" ? http.createServer(listener) : http.createServer(listener);
-        server.listen(port, () => {
+        let server = framework !== "koa" ? http.createServer(listener) : http.createServer(listener);
+        server.listen(port, host, function () {
             console.log(`Listening on http://${host}:${port}/ (threadId: ${threadId})`);
             const maxWorkers = num || (availableParallelism() - 1);
 
             for (let i = 0; i < maxWorkers; i++) {
                 let data;
                 if (os.type() === "Windows_NT") {
-                    data = { workerData: { handle: { port: server._handle.port }, host: host, port: port, framework: framework } }
+                    data = { workerData: { handle: { fd: server._handle.fd, port: server._handle.port }, threadId: i, host: host, port: port, framework: framework } }
                 } else {
-                    data = { workerData: { handle: { fd: server._handle.fd }, host: host, port: port, framework: framework } }
+                    data = { workerData: { handle: { fd: server._handle.fd }, threadId: i, host: host, port: port, framework: framework } }
                 }
+
+                // 
+                // using this same file as url: fileURLToPath(import.meta.url)
                 // new Worker(fileURLToPath(import.meta.url), data);
+                // 
                 new Worker(filepath, data);
             }
-        });
+        }.bind(null, server));
+
     }
 }
 

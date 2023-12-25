@@ -13,5 +13,8 @@ server.get('/', function (request, reply) {
     reply.send(`Custom Application: Hello World - test Route! (threadId: ${threadId})\n`)
 })
 
-export default server;
+server.listen({
+    port: 3000,
+    host: "localhost"
+});
 
