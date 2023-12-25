@@ -5,7 +5,7 @@ multi-processing and multi-threaded http servers that provides support for expre
 
 This is a linux only port and windows system may not work due to this implementation depending on 'file descriptor os functionality in linux'.
 
-- Run command `threadinghttp frameworkname /folderpath concurrency host port` [allowed options for framworkname http, express, koa, fastify]. Example: .
+- Run command `threadinghttp /folderpath frameworkname concurrency host port` [allowed options for framworkname http, express, koa, fastify]. Example: `concurrenthttp '/path/test' express 10 'localhost' 3000`.
 - find the needed files in the folder folderpath.
 - Make changes to your server application needed to run in template_server.js, and frameworkname.js files.
 - You will find all demos in the [demos folder as well](https://github.com/ganeshkbhat/threaded-httpserver/tree/main/demos).

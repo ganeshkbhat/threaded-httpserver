@@ -1,7 +1,9 @@
+#!/usr/bin/env node
+
 import * as path from 'node:path';
 import * as fs from "node:fs";
 
-// srv fm:::express d:'/path/test' c:'10' h:'localhost' p:'3000'
+// concurrenthttp '/path/test' express 10 'localhost' 3000
 
 // https://nodejs.org/en/learn/command-line/accept-input-from-the-command-line-in-nodejs
 
