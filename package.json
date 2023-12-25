@@ -37,5 +37,8 @@
     "mocha": "^10.2.0",
     "should": "^13.2.3",
     "sinon": "^17.0.1"
+  },
+  "dependencies": {
+    "accel": "^0.1.9"
   }
 }
