@@ -10,6 +10,6 @@ import { default as Threaded } from "../index.js";
 import * as path from "node:path";
 
 var listener = server;
-
-Threaded(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\serverfile.js"), 10, "localhost", 3000, listener, "express");
+var srv = Threaded(path.join("C:\\Users\\ganes\\OneDrive\\Documents\\projects\\threaded\\demos\\serverfile.js"), 10, "localhost", 3000, listener, "express");
+console.log("Threaded function implemented: ", srv);
 
