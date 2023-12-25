@@ -4,16 +4,28 @@ import { availableParallelism } from "node:os";
 import { fileURLToPath } from "node:url";
 import * as os from "node:os";
 
+/**
+ *
+ *
+ * @export
+ * @param {*} filepath
+ * @param {*} num
+ * @param {*} host
+ * @param {*} port
+ * @param {*} listener
+ * @param {string} [framework="http"]
+ * @return {*} 
+ */
 export function Threaded(filepath, num, host, port, listener, framework = "http") {
     let threadedPool = [];
     host = host || "locahost";
     port = port || 9000;
 
-    // /** @type {http.RequestListener} */
-    // listener = !!listener ? listener : function (req, res) {
-    //     res.writeHead(200);
-    //     res.end(`Default: Hello World! (threadId: ${threadId})\n`);
-    // };
+    /** @type {http.RequestListener} */
+    listener = !!listener ? listener : function (req, res) {
+        res.writeHead(200);
+        res.end(`Default: Hello World! (threadId: ${threadId})\n`);
+    };
 
     if (isMainThread) {
         let server = framework !== "koa" ? http.createServer(listener) : http.createServer(listener);
@@ -40,6 +52,18 @@ export function Threaded(filepath, num, host, port, listener, framework = "http"
     }
 }
 
+/**
+ *
+ *
+ * @export
+ * @param {*} filepath
+ * @param {*} num
+ * @param {*} host
+ * @param {*} port
+ * @param {*} listener
+ * @param {string} [framework="http"]
+ * @return {*} 
+ */
 export function ThreadedAsync(filepath, num, host, port, listener, framework = "http") {
     return new Promise(function (resolve, reject) {
         try {
@@ -47,11 +71,11 @@ export function ThreadedAsync(filepath, num, host, port, listener, framework = "
             host = host || "locahost";
             port = port || 9000;
 
-            // /** @type {http.RequestListener} */
-            // listener = !!listener ? listener : function (req, res) {
-            //     res.writeHead(200);
-            //     res.end(`Default: Hello World! (threadId: ${threadId})\n`);
-            // };
+            /** @type {http.RequestListener} */
+            listener = !!listener ? listener : function (req, res) {
+                res.writeHead(200);
+                res.end(`Default: Hello World! (threadId: ${threadId})\n`);
+            };
 
             if (isMainThread) {
                 let server = framework !== "koa" ? http.createServer(listener) : http.createServer(listener);
