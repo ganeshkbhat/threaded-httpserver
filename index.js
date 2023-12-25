@@ -16,6 +16,7 @@ export function Threaded(filepath, num, host, port, listener, framework = "http"
 
     if (isMainThread) {
         let server = framework !== "koa" ? http.createServer(listener) : http.createServer(listener);
+        
         server.listen(port, host, function () {
             console.log(`Listening on http://${host}:${port}/ (threadId: ${threadId})`);
             const maxWorkers = num || (availableParallelism() - 1);
