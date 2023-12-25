@@ -23,7 +23,7 @@ import { isMainThread, Worker, workerData, threadId } from "node:worker_threads"
 export let server = express();
 server.get("/", function (req, res, next) {
     res.writeHead(200);
-    res.end(\`Custom Application: Hello World! (threadId: \${threadId})\n\`);
+    res.end(`Custom Application: Hello World! (threadId: ${threadId})\n`);
 });
 
 export default server;
@@ -55,12 +55,12 @@ if (workerData.framework === "fastify") { server = serverfastify; }
 /** @type {http.RequestListener} */
 listener = listener || function (req, res) {
     res.writeHead(200);
-    res.end(\`Template: Hello World! (threadId: ${threadId})\n\`);
+    res.end(`Template: Hello World! (threadId: ${threadId})\n`);
 };
 
 if (!isMainThread) {
     http.createServer(workerData?.framework !== "koa" ? listener : listener.callback).listen(workerData.handle, () => {
-        console.log(`Listening on http://\${workerData.host}:\${workerData.port}/ (threadId: ${workerData.threadId})\`);
+        console.log(`Listening on http://${workerData.host}:${workerData.port}/ (threadId: ${workerData.threadId})`);
     });
 }
 ```
