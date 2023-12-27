@@ -11,6 +11,7 @@ import { fileURLToPath } from "url";
 import { availableParallelism } from "node:os";
 import { fileURLToPath } from "node:url";
 import * as os from "node:os";
+import { inherits } from "node:util";
 
 
 /**
@@ -35,6 +36,16 @@ export function Processes(filepath, num, host, port, listener, framework = "http
     cluster.setupPrimary({
         // exec: __dirname + filepath,
         exec: normalize(filepath),
+        args: [], // ['--use', 'https'],
+        silent: true,
+        // cwd: "",
+        // serialization: false,
+        stdio: "inherit",
+        // stdio: [ 'ignore', out, err ],
+        // uid: 10,
+        // gid: 10,
+        // inspectPort: 10,
+        // windowsHide: false
     });
 
     for (let i = 0; i < cpuCount; i++) {
