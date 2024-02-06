@@ -1,21 +1,48 @@
 {
-  "name": "threaded-httpserver",
-  "version": "1.0.0",
-  "description": "threaded-httpserver provides support for threaded server",
+  "name": "concurrent-httpserver",
+  "version": "0.0.1",
+  "description": "multi-processing and multi-threaded http servers that provides support for express, https, https servers.  TODO: fastify, koa. This is a linux only port and windows system may not work due to this implementation depending on 'file descriptor os functionality in linux'.",
   "main": "index.js",
   "type": "module",
   "directories": {
     "test": "tests"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "bin": {
+    "concurrenthttp": "./src/templates.js"
   },
-  "keywords": [],
+  "scripts": {
+    "postinstall": "chmod +x ./src/templates.js && npm link",
+    "test": ""
+  },
+  "keywords": [
+    "concurrent server",
+    "concurrent http server",
+    "concurrent https server",
+    "concurrent express server",
+    "express",
+    "server",
+    "multi-threaded",
+    "multi-processing",
+    "http",
+    "https",
+    "concurrent server stubs",
+    "concurrent server templates"
+  ],
   "author": "Ganesh Bhat",
   "license": "MIT",
   "devDependencies": {
+    "chai": "^4.3.10",
+    "chai-http": "^4.4.0",
     "express": "^4.18.2",
     "fastify": "^4.24.3",
-    "koa": "^2.14.2"
+    "koa": "^2.14.2",
+    "koa-router": "^12.0.1",
+    "loadtest": "^8.0.6",
+    "mocha": "^10.2.0",
+    "should": "^13.2.3",
+    "sinon": "^17.0.1"
+  },
+  "dependencies": {
+    "accel": "^0.1.9"
   }
 }

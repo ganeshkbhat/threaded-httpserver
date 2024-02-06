@@ -1,4 +1,8 @@
+<<<<<<< HEAD:demos/dms.js
 // import { default as MultiThread } from './tds.js';
+=======
+import { default as MultiThread } from './extras.tds.js';
+>>>>>>> 2a20883606d7d2e6b4ac44ec40317914f833d2aa:demos/demos.threads/extras.dms.js
 
 // // Your thread function
 // const threadFunction = (data) => {

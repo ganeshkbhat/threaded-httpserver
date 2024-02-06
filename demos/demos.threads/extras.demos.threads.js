@@ -1,5 +1,5 @@
 // const MultiThread = require('../threads.js');
-import { default as MultiThread } from "./threads.js";
+import { default as MultiThread } from "./extras.threads.js";
 
 // Your thread function
 const threadFunction = (data) => {
