@@ -19,7 +19,7 @@ const threadDataArray = [
 // Use the library to run threads
 const mainFunction = async () => {
   try {
-    const results = await MultiThread.runThreads(threadFunction, threadDataArray);
+    const results = await MultiThread.runThreads(threadFunction, threadDataArray, __filename);
     console.log('Results from each thread:', results);
   } catch (error) {
     console.error('Error:', error);

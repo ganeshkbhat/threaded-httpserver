@@ -35,6 +35,8 @@ class MultiThread {
 if (!isMainThread) {
   const { threadFunction } = workerData;
   threadFunction(workerData.data);
+} else {
+
 }
 
 export default MultiThread;
